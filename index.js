@@ -49,11 +49,11 @@ async function run() {
 
 // get data
 
-// app.get('/task', async(req,res)=>{
-//     const cursor = taskCollection.find();
-//     const result = await cursor.toArray();
-//     res.send(result);
-// })
+app.get('/tasks', async(req,res)=>{
+    const cursor = taskCollection.find();
+    const result = await cursor.toArray();
+    res.send(result);
+})
 
 
 
