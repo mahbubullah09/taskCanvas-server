@@ -67,41 +67,42 @@ app.get('/tasks', async(req,res)=>{
 
 
 
+    //update
+
+app.put('/tasks/:id', async(req,res)=>{
+    const id = req.params.id;
+    const filter ={_id : new ObjectId(id)}
+    const options = {upsert: true};
+    const updatedTask= req.body;
+    const Task ={
+        $set: {
+            title: updatedTask.title, 
+            priority: updatedTask.priority, 
+           
+            description: updatedTask.description
+        }
+    }
+
+    const result = await taskCollection.updateOne(filter, Task)
+    
+    res.send(result);
+})
 
 
-// app.get('/task/:id', async(req,res)=>{
-//     const id = req.params.id;
-//     const query = {_id: new ObjectId(id)}
+
+
+
+app.get('/task/:id', async(req,res)=>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
 
     
-//     const result = await taskCollection.findOne(query);
+    const result = await taskCollection.findOne(query);
 
-//     res.send(result);
-// })
+    res.send(result);
+})
 
-// //update
 
-// app.put('/task/:id', async(req,res)=>{
-//     const id = req.params.id;
-//     const filter ={_id : new ObjectId(id)}
-//     const options = {upsert: true};
-//     const updatedProduct= req.body;
-//     const product ={
-//         $set: {
-//             image: updatedProduct.image, 
-//             product: updatedProduct.product, 
-//             brand_name: updatedProduct.brand_name, 
-//             category: updatedProduct.category, 
-//             rating: updatedProduct.rating, 
-//             price: updatedProduct.price, 
-//             description: updatedProduct.description
-//         }
-//     }
-
-//     const result = await taskCollection.updateOne(filter, product)
-    
-//     res.send(result);
-// })
 
 
 
@@ -110,20 +111,6 @@ app.get('/tasks', async(req,res)=>{
  
 
 
-    // //send in cart
-    // app.post('/myCart', async(req,res) =>{
-    //     const newCart= req.body;
-    //     console.log(newCart);
-
-    // const result = await myCartCollection .insertOne(newCart);
-    // res.send(result);
-    // })
-
-    // app.get('/myCart', async(req,res)=>{
-    //     const cursor = myCartCollection.find();
-    //     const result = await cursor.toArray();
-    //     res.send(result);
-    // })
 
 
 
