@@ -55,6 +55,17 @@ app.get('/tasks', async(req,res)=>{
     res.send(result);
 })
 
+app.get('/task/:email', async (req,res) =>{
+    const email = req.params.email;
+    console.log(res.params);
+  
+   
+     const  query = {Email: req?.params?.email}
+    const result = await taskCollection.find(query).toArray();
+  res.send(result);
+  })
+  
+
     // //delete tasks
 
     app.delete('/tasks/:id', async(req,res) =>{
